@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>トップページ</h2>
+  <!-- url_for() の引数は Blueprint名.メソッド名 です。 -->
+  <a href="{{url_for('book.book_list')}}">本の一覧</a><br>
+  <a href="{{url_for('user.user_list')}}">ユーザの一覧</a><br>
+  <a href="{{url_for('game.game_list')}}">ゲームの一覧</a><br>
+</body>
+</html>
