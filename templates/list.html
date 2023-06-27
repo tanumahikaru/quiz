@@ -1,0 +1,27 @@
+{% block content %}
+  <h1>一覧</h1>
+  <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>問題</th>
+            <th>回答1</th>
+            <th>回答2</th>
+            <th>回答3</th>
+            <th>回答4</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for quiz in quizs %}
+        <tr>
+            <td>{{ quiz[0] }}</td>
+            <td>{{ quiz[1] }}</td>
+            <td>{{ quiz[2] }}</td>
+            <td>{{ quiz[3] }}</td>
+            <td>{{ quiz[4] }}</td>
+            <td>{{ quiz[5] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
