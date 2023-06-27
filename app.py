@@ -70,6 +70,43 @@ def register_exe():
         error = '登録に失敗しました。'
     return render_template('register.html', error=error)
 
+@app.route('/register_quiz', methods=['POST'])
+def register_exe():
+    title = request.form.get('title')
+    answer1 = request.form.get('answer1')
+    answer2 = request.form.get('answer2')
+    answer3 = request.form.get('answer3')
+    answer4 = request.form.get('answer4')
+    correctanswer = request.form.get('correctanswer')
+    
+    if title == '':
+        error = '問題文が未入力です。'
+        return render_template('quiz_register.html', error = error)
+    if answer1 == '':
+        error = '回答１が未入力です。'
+        return render_template('quiz_register.html', error = error)
+    if answer2 == '':
+        error = '回答２が未入力です。'
+        return render_template('quiz_register.html', error = error)
+    if answer3 == '':
+        error = '回答３が未入力です。'
+        return render_template('quiz_register.html', error = error)
+    if answer4 == '':
+        error = '回答４が未入力です。'
+        return render_template('quiz_register.html', error = error)
+    if correctanswer == '':
+        error = '正解が未入力です。'
+        return render_template('quiz_register.html', error = error)
+    
+    count = db.insert_user(title, answer1, answer2, answer3, answer4, correctanswer)
+    
+    if count == 1:
+        msg = '登録が完了しました。'
+        return render_template('index.html', msg=msg)
+    else:
+        error = '登録に失敗しました。'
+    return render_template('quiz_register.html', error=error)
+
 # リスト
 @app.route('/list')
 def sample_list():
