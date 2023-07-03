@@ -64,6 +64,66 @@ def login(user_name, password):
     
     return flg
 
+def insert_quiz(title,answer1,answer2,answer3,answer4,correctanswer):
+    sql = 'INSERT INTO quiz VALUES(default, %s, %s, %s, %s,%s,%s)'
+    
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql, (title,answer1,answer2,answer3,answer4,correctanswer))
+        count = cursor.rowcount #更新件数を取得
+        connection.commit()
+        
+    except psycopg2.DatabaseError:
+        count = 0
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return count
+
+def de_quiz(quizid):
+    sql = 'DELETE FROM quiz WHERE quizid = %s'
+    
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql, (quizid,))
+        count = cursor.rowcount
+        connection.commit()
+        
+    except psycopg2.DatabaseError:
+        count = 0
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return count
+
+def edit_quiz(quizid, title,answer1,answer2,answer3,answer4,correctanswer):
+    sql = 'UPDATE quiz SET Quizcontent=%s, Answer1=%s, Answer2=%s, Answer3=%s, Answer4=%s, Correctanswer=%s WHERE quizid=%s;'
+    
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        
+        cursor.execute(sql, (title,answer1,answer2,answer3,answer4,correctanswer,quizid))
+        count = cursor.rowcount #更新件数を取得
+        connection.commit()
+        
+    except psycopg2.DatabaseError:
+        count = 0
+    finally:
+        cursor.close()
+        connection.close()
+        
+    return count
+
+
+
+
 def select_all_quiz():
     connection = get_connection()
     cursor = connection.cursor()
@@ -76,3 +136,4 @@ def select_all_quiz():
     cursor.close()
     connection.close()
     return rows
+
