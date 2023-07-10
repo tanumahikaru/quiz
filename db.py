@@ -121,7 +121,41 @@ def edit_quiz(quizid, title,answer1,answer2,answer3,answer4,correctanswer):
         
     return count
 
+def select_quiz(quizid):
+    sql = 'SELECT quizid, quizcontent, answer1, answer2, answer3, answer4 FROM quiz WHERE quizid = %s'
 
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(sql, (quizid,))
+        quiz = cursor.fetchone()
+
+        cursor.close()
+        connection.close()
+
+        return quiz
+
+    except psycopg2.DatabaseError:
+        return None
+
+def get_correct_answer(quizid):
+    sql = 'SELECT correctanswer FROM quiz WHERE quizid = %s'
+
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+
+        cursor.execute(sql, (quizid,))
+        correct_answer = cursor.fetchone()
+
+        cursor.close()
+        connection.close()
+
+        return correct_answer[0] if correct_answer else None
+
+    except psycopg2.DatabaseError:
+        return None
 
 
 def select_all_quiz():

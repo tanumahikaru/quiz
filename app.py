@@ -137,7 +137,6 @@ def delete_quiz():
 
 
 
-
 @app.route('/edit_quiz_form')
 def edit_quiz_form():
     return render_template('edit_quiz.html')
@@ -186,11 +185,29 @@ def edit_quiz():
 
 
 
+@app.route('/quiz/<int:quizid>', methods=['GET'])
+def quiz(quizid):
+    quiz = db.select_quiz(quizid)
+    if quiz:
+        return render_template('quiz.html', quiz=quiz)
+    else:
+        return render_template('list.html', error='指定されたクイズが見つかりませんでした。')
 
-
-
-
-
+@app.route('/quiz/<int:quizid>', methods=['POST'])
+def check_answer(quizid):
+    selected_answer = request.form.get('answer')
+    if selected_answer is not None:
+        correct_answer = db.get_correct_answer(quizid)
+        if correct_answer is not None:
+            if int(selected_answer) == correct_answer:
+                result = '正解です！'
+            else:
+                result = '不正解です。正解は「' + str(correct_answer) + '」です。'
+        else:
+            result = '正解が見つかりませんでした。'
+    else:
+        result = '回答が選択されていません。'
+    return render_template('result.html', result=result)
 
 
 

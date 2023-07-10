@@ -1,27 +1,37 @@
-{% block content %}
-  <h1>一覧</h1>
-  <table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>問題</th>
-            <th>回答1</th>
-            <th>回答2</th>
-            <th>回答3</th>
-            <th>回答4</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for quiz in quizs %}
-        <tr>
-            <td>{{ quiz[0] }}</td>
-            <td>{{ quiz[1] }}</td>
-            <td>{{ quiz[2] }}</td>
-            <td>{{ quiz[3] }}</td>
-            <td>{{ quiz[4] }}</td>
-            <td>{{ quiz[5] }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-  </table>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz List</title>
+</head>
+<body>
+    <h3>クイズ一覧</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>問題</th>
+                <th>回答1</th>
+                <th>回答2</th>
+                <th>回答3</th>
+                <th>回答4</th>
+                <th>挑戦する</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz in quizs %}
+            <tr>
+                <td>{{ quiz[0] }}</td>
+                <td>{{ quiz[1] }}</td>
+                <td>{{ quiz[2] }}</td>
+                <td>{{ quiz[3] }}</td>
+                <td>{{ quiz[4] }}</td>
+                <td>{{ quiz[5] }}</td>
+                <td><a href="{{ url_for('quiz', quizid=quiz[0]) }}">挑戦する</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
