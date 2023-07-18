@@ -40,28 +40,27 @@ def insert_user(user_name, mail,password):
     return count
 
 def login(user_name, password):
-    sql = 'SELECT hashed_password, salt FROM quiz_user WHERE name = %s' #ユーザー名がに件取れる可能性があるから直すnmae=%sのとこ
+    sql = "SELECT hashed_password, salt FROM quiz_user WHERE name = %s"
     flg = False
 
-    try :
+    try:
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(sql, (user_name, ))
+        cursor.execute(sql, (user_name,))
         user = cursor.fetchone()
 
         if user != None:
             salt = user[1]
-
             hashed_password = get_hash(password, salt)
 
-            if hashed_password == user[0]:
+            if hashed_password == user[0] and user_name != 'ss':
                 flg = True
     except psycopg2.DatabaseError:
         flg = False
-    finally :
+    finally:
         cursor.close()
         connection.close()
-    
+
     return flg
 
 def insert_quiz(title,answer1,answer2,answer3,answer4,correctanswer):
@@ -171,3 +170,28 @@ def select_all_quiz():
     connection.close()
     return rows
 
+
+
+def adminlogin(user_name, password):
+    sql = "SELECT hashed_password, salt FROM quiz_user WHERE name = %s"
+    flg = False
+
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(sql, (user_name,))
+        admin = cursor.fetchone()
+
+        if admin != None:
+            salt = admin[1]
+            hashed_password = get_hash(password, salt)
+
+            if hashed_password == admin[0] and user_name == 'ss':
+                flg = True
+    except psycopg2.DatabaseError:
+        flg = False
+    finally:
+        cursor.close()
+        connection.close()
+
+    return flg

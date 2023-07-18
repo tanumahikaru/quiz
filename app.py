@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect , url_for, session
+from flask import Flask, render_template, request, redirect , url_for, session 
 import db, string, random
+from datetime import timedelta
 
 app = Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters, k=256))
@@ -18,7 +19,12 @@ def login():
     user_name = request.form.get('username')
     password = request.form.get('password')
     
-    if db.login(user_name, password):
+    if db.adminlogin(user_name, password):
+         session['admin'] = True #sessionにuserバリューにTrueを保存
+         session.permanent = True #sessionの有効期限を設定
+         app.permanent_session_lifetime = timedelta(minutes=30) #sessionの有効期限を30分に設定
+         return redirect(url_for('admin'))
+    elif db.login(user_name, password):
         session['user'] = True #sessionにuserバリューにTrueを保存
         return redirect(url_for('mypage'))
     else:
@@ -37,9 +43,17 @@ def logout():
 @app.route('/mypage', methods=['GET'])
 def mypage():
     if 'user' in session:
-        return render_template('mypage.html')
+        return render_template('user_mypage.html')
     else:
         return redirect(url_for('index'))
+    
+@app.route('/admin', methods=['GET'])
+def admin():
+    if 'admin' in session:
+        if session['admin']:
+            return render_template('mypage.html')
+    return redirect(url_for('index'))
+
 
 @app.route('/register')
 def register_form():
@@ -134,6 +148,10 @@ def delete_quiz():
         return render_template('delete_quiz.html', error=error)
 
 
+# ここ
+@app.route('/quiz_form')
+def quiz_form():
+    return render_template('layout.html')
 
 
 
@@ -182,8 +200,6 @@ def edit_quiz():
     else:
         error = '編集に失敗しました。'
     return render_template('register_quiz.html', error=error)
-
-
 
 @app.route('/quiz/<int:quizid>', methods=['GET'])
 def quiz(quizid):

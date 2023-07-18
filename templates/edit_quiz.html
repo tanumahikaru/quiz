@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
     <h1>クイズ編集</h1>
     
     {% if error != null %}
@@ -29,5 +24,4 @@
             4<input type="radio"name="correctanswer"value=4><br>
         <button type="submit">登録</button>
   </form>
-</body>
-</html>
+  {% endblock %}

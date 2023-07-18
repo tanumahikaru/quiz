@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+    {% block content %}
     <h3>クイズ</h3>
     <p>{{ quiz[1] }}</p>
     <form action="{{ url_for('check_answer', quizid=quiz[0]) }}" method="post">
@@ -15,6 +10,4 @@
         <input type="radio" name="answer" value="4"> {{ quiz[5] }}<br>
         <input type="submit" value="回答する">
     </form>
-
-</body>
-</html>
+    {% endblock %}
