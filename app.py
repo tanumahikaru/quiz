@@ -218,7 +218,7 @@ def check_answer(quizid):
             if int(selected_answer) == correct_answer:
                 result = '正解です！'
             else:
-                result = '不正解です。正解は「' + str(correct_answer) + '」です。'
+                result = '不正解です。正解は「' + str(correct_answer) + '」番です。'
         else:
             result = '正解が見つかりませんでした。'
     else:
@@ -232,6 +232,15 @@ def check_answer(quizid):
 def sample_list():
     quiz_list = db.select_all_quiz()
     return render_template('list.html', quizs=quiz_list)
+
+
+@app.route('/search_exe', methods=['POST'])
+def search_exe():
+    quizcontent = request.form.get('quizcontent')
+    quiz_list = db.search_quiz(quizcontent)
+    return render_template('list.html', quizs=quiz_list)
+
+
 
 
 if __name__ == '__main__':
