@@ -6,6 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="クイズアプリWeb" />
         <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+        {% block css %}
+        <!-- CSS埋め込み -->
+        {% endblock %}
+
     </head>
     <body>
         <header class="header">

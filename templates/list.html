@@ -3,6 +3,12 @@
 {% block content %}
 
     <h3>クイズ一覧</h3>
+
+    <form action = "{{url_for('search_exe')}}" method = "POST">
+        <input type = "text" name = "quizcontent" placeholder = "検索">
+        <input type = "submit" value = "検索">
+    </form>
+
     <table>
         <thead>
             <tr>

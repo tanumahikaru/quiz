@@ -195,3 +195,18 @@ def adminlogin(user_name, password):
         connection.close()
 
     return flg
+
+
+def search_quiz(key):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    sql = 'SELECT quizid, quizcontent, answer1, answer2, answer3, answer4 FROM quiz WHERE quizcontent LIKE %s'
+    key = '%' + key + '%'
+    
+    cursor.execute(sql, (key,))
+    rows = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+    return rows
