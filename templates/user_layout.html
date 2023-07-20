@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <title>クイズアプリ</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="クイズアプリWeb" />
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
+        {% block css %}
+        <!-- CSS埋め込み -->
+        {% endblock %}
+
+    </head>
+    <body>
+        <header class="header">
+            <div class="header-inner inner">
+                <h1 class="header-title"><a href="{{url_for('mypage')}}">GORIGORICODE</a></h1>
+                <nav class="header-nav">
+                    <ul class="header-nav-list">
+                        <li class="header-nav-item"><a class="header-nav-item-link" href="#">About</a></li>
+                        <li class="header-nav-item"><a class="header-nav-item-link" href="#">Service</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>

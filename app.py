@@ -26,6 +26,9 @@ def login():
          return redirect(url_for('admin'))
     elif db.login(user_name, password):
         session['user'] = True #sessionにuserバリューにTrueを保存
+        session['admin'] = True #sessionにuserバリューにTrueを保存
+        session.permanent = True #sessionの有効期限を設定
+        app.permanent_session_lifetime = timedelta(minutes=30) #sessionの有効期限を30分に設定
         return redirect(url_for('mypage'))
     else:
         error = 'ログインに失敗しました。'
@@ -43,7 +46,8 @@ def logout():
 @app.route('/mypage', methods=['GET'])
 def mypage():
     if 'user' in session:
-        return render_template('user_mypage.html')
+        if session['user']:
+            return render_template('user_mypage.html')
     else:
         return redirect(url_for('index'))
     
@@ -126,6 +130,49 @@ def register_quiz():
         error = '登録に失敗しました。'
     return render_template('register_quiz.html', error=error)
 
+# user登録
+@app.route('/user_register_quiz_form')
+def user_register_quiz_form():
+    return render_template('user_register_quiz.html')
+
+
+@app.route('/user_register_quiz', methods=['POST'])
+def user_register_quiz():
+    title = request.form.get('title')
+    answer1 = request.form.get('answer1')
+    answer2 = request.form.get('answer2')
+    answer3 = request.form.get('answer3')
+    answer4 = request.form.get('answer4')
+    correctanswer = request.form.get('correctanswer')
+    
+    if title == '':
+        error = '問題文が未入力です。'
+        return render_template('user_register_quiz.html', error = error)
+    if answer1 == '':
+        error = '回答１が未入力です。'
+        return render_template('user_register_quiz.html', error = error)
+    if answer2 == '':
+        error = '回答２が未入力です。'
+        return render_template('user_register_quiz.html', error = error)
+    if answer3 == '':
+        error = '回答３が未入力です。'
+        return render_template('user_register_quiz.html', error = error)
+    if answer4 == '':
+        error = '回答４が未入力です。'
+        return render_template('user_register_quiz.html', error = error)
+    if correctanswer == '':
+        error = '正解が未入力です。'
+        return render_template('user_register_quiz.html', error = error)
+    
+    count = db.insert_quiz(title, answer1, answer2, answer3, answer4, correctanswer)
+    
+    if count == 1:
+        msg = '登録が完了しました。'
+        return render_template('user_register_quiz.html', msg=msg)
+    else:
+        error = '登録に失敗しました。'
+    return render_template('user_register_quiz.html', error=error)
+
 @app.route('/delete_quiz_form')
 def delete_quiz_form():
     return render_template('delete_quiz.html')
@@ -146,12 +193,6 @@ def delete_quiz():
     else:
         error = '削除に失敗しました。'
         return render_template('delete_quiz.html', error=error)
-
-
-# ここ
-@app.route('/quiz_form')
-def quiz_form():
-    return render_template('layout.html')
 
 
 
@@ -225,6 +266,30 @@ def check_answer(quizid):
         result = '回答が選択されていません。'
     return render_template('result.html', result=result)
 
+# quizゆーざ
+@app.route('/user_quiz/<int:quizid>', methods=['GET'])
+def user_quiz(quizid):
+    quiz = db.select_quiz(quizid)
+    if quiz:
+        return render_template('user_quiz.html', quiz=quiz)
+    else:
+        return render_template('user_list.html', error='指定されたクイズが見つかりませんでした。')
+
+@app.route('/user_quiz/<int:quizid>', methods=['POST'])
+def user_check_answer(quizid):
+    selected_answer = request.form.get('answer')
+    if selected_answer is not None:
+        correct_answer = db.get_correct_answer(quizid)
+        if correct_answer is not None:
+            if int(selected_answer) == correct_answer:
+                result = '正解です！'
+            else:
+                result = '不正解です。正解は「' + str(correct_answer) + '」番です。'
+        else:
+            result = '正解が見つかりませんでした。'
+    else:
+        result = '回答が選択されていません。'
+    return render_template('user_result.html', result=result)
 
 
 # リスト
@@ -233,6 +298,11 @@ def sample_list():
     quiz_list = db.select_all_quiz()
     return render_template('list.html', quizs=quiz_list)
 
+@app.route('/user_list')
+def user_list():
+    quiz_list = db.select_all_quiz()
+    return render_template('user_list.html', quizs=quiz_list)
+
 
 @app.route('/search_exe', methods=['POST'])
 def search_exe():
@@ -240,6 +310,11 @@ def search_exe():
     quiz_list = db.search_quiz(quizcontent)
     return render_template('list.html', quizs=quiz_list)
 
+@app.route('/user_search_exe', methods=['POST'])
+def user_search_exe():
+    quizcontent = request.form.get('quizcontent')
+    quiz_list = db.search_quiz(quizcontent)
+    return render_template('user_list.html', quizs=quiz_list)
 
 
 

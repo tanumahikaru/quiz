@@ -1,0 +1,7 @@
+{% extends "user_layout.html" %}
+
+    {% block content %}
+    <h3>回答結果</h3>
+    <p>{{ result }}</p>
+    <a href="{{ url_for('user_list') }}">戻る</a>
+    {% endblock %}

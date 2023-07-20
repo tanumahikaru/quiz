@@ -1,0 +1,39 @@
+{% extends "user_layout.html" %}
+
+{% block content %}
+
+    <h3>クイズ一覧</h3>
+
+    <form action = "{{url_for('user_search_exe')}}" method = "POST">
+        <input type = "text" name = "quizcontent" placeholder = "検索">
+        <input type = "submit" value = "検索">
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>問題</th>
+                <th>回答1</th>
+                <th>回答2</th>
+                <th>回答3</th>
+                <th>回答4</th>
+                <th>挑戦する</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz in quizs %}
+            <tr>
+                <td>{{ quiz[0] }}</td>
+                <td>{{ quiz[1] }}</td>
+                <td>{{ quiz[2] }}</td>
+                <td>{{ quiz[3] }}</td>
+                <td>{{ quiz[4] }}</td>
+                <td>{{ quiz[5] }}</td>
+                <td><a href="{{ url_for('user_quiz', quizid=quiz[0]) }}">挑戦する</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

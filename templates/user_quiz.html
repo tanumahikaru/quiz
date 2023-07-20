@@ -1,0 +1,33 @@
+{% extends "user_layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/quiz.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="quiz-container">
+    <h3>クイズ</h3>
+    <p>{{ quiz[1] }}</p>
+    <form action="{{ url_for('user_check_answer', quizid=quiz[0]) }}" method="post">
+        <div class="options">
+            <label>
+                <input type="radio" name="answer" value="1">
+                <span>{{ quiz[2] }}</span>
+            </label><br>
+            <label>
+                <input type="radio" name="answer" value="2">
+                <span>{{ quiz[3] }}</span>
+            </label><br>
+            <label>
+                <input type="radio" name="answer" value="3">
+                <span>{{ quiz[4] }}</span>
+            </label><br>
+            <label>
+                <input type="radio" name="answer" value="4">
+                <span>{{ quiz[5] }}</span>
+            </label><br>
+        </div>
+        <input type="submit" value="回答する">
+    </form>
+</div>
+{% endblock %}

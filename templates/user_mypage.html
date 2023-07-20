@@ -1,11 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>user</h1>
-</body>
-</html>
+{% extends "user_layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/mypage.css')}}">
+{% endblock %}
+
+{% block content %}
+
+    <h3>マイページ</h3>
+    <div class="sample1">
+        <a href="{{url_for('logout')}}">ログアウト</a>
+        <a class="nav-link" href="{{url_for('user_list')}}"></a>
+        <a class="nav-link" href="{{url_for('user_register_quiz_form')}}"></a>
+    </div>
+    <!-- ここにマイページのコンテンツを追加 -->
+    <p>マイページのコンテンツ</p>
+</div>
+{% endblock %}
