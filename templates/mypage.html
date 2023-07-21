@@ -8,13 +8,22 @@
 
     <h3>マイページ</h3>
     <div class="sample1">
-        <a href="{{url_for('logout')}}">ログアウト</a>
-        <a class="nav-link" href="{{url_for('sample_list')}}"></a>
-        <a class="nav-link" href="{{url_for('register_quiz_form')}}"></a>
-        <a class="nav-link" href="{{url_for('delete_quiz_form')}}"></a>
-        <a class="nav-link" href="{{url_for('edit_quiz_form')}}"></a>
+        <div class="flex_test-box">
+        <div class="flex_test-item">
+            <a class="nav-link" href="{{url_for('sample_list')}}"></a>
+        </div>
+        <div class="flex_test-item">
+            <a class="nav-link" href="{{url_for('register_quiz_form')}}"></a>
+        </div>
+        <div class="flex_test-item">
+            <a class="nav-link" href="{{url_for('delete_quiz_form')}}"></a>
+        </div>
+        <div class="flex_test-item">
+            <a class="nav-link" href="{{url_for('edit_quiz_form')}}"></a>
+        </div>
+        <div class="flex_test-item">
+            <a href="{{url_for('logout')}}"></a>
+        </div>    
+        </div>
     </div>
-    <!-- ここにマイページのコンテンツを追加 -->
-    <p>マイページのコンテンツ</p>
-</div>
 {% endblock %}

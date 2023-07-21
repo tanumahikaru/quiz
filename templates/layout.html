@@ -15,14 +15,13 @@
     <body>
         <header class="header">
             <div class="header-inner inner">
-                <h1 class="header-title"><a href="{{url_for('admin')}}">GORIGORICODE</a></h1>
+                <h1 class="header-title"><a href="{{url_for('admin')}}">QUIZ</a></h1>
                 <nav class="header-nav">
                     <ul class="header-nav-list">
-                        <li class="header-nav-item"><a class="header-nav-item-link" href="#">About</a></li>
-                        <li class="header-nav-item"><a class="header-nav-item-link" href="#">Service</a></li>
-                        <li class="header-nav-item"><a class="header-nav-item-link" href="#">News</a></li>
-                        <li class="header-nav-item"><a class="header-nav-item-link" href="#">Blog</a></li>
-                        <li class="header-nav-item"><a class="header-nav-item-link" href="#">Contact</a></li>
+                        <li class="header-nav-item"><a class="header-nav-item-link" href="{{url_for('sample_list')}}">GAME</a></li>
+                        <li class="header-nav-item"><a class="header-nav-item-link" href="{{url_for('register_quiz_form')}}">CREATE</a></li>
+                        <li class="header-nav-item"><a class="header-nav-item-link" href="{{url_for('delete_quiz_form')}}">DELETE</a></li>
+                        <li class="header-nav-item"><a class="header-nav-item-link" href="{{url_for('edit_quiz_form')}}">EDIT</a></li>
                     </ul>
                 </nav>
             </div>

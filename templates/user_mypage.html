@@ -8,9 +8,17 @@
 
     <h3>マイページ</h3>
     <div class="sample1">
-        <a href="{{url_for('logout')}}">ログアウト</a>
-        <a class="nav-link" href="{{url_for('user_list')}}"></a>
-        <a class="nav-link" href="{{url_for('user_register_quiz_form')}}"></a>
+        <div class="flex_test-box">
+            <div class="flex_test-item">
+            <a class="nav-link" href="{{url_for('user_list')}}"></a>
+            </div>
+            <div class="flex_test-item">
+            <a class="nav-link" href="{{url_for('user_register_quiz_form')}}"></a>
+            </div>
+            <div class="flex_test-item">
+            <a href="{{url_for('logout')}}"></a>
+            </div>
+        </div>    
     </div>
     <!-- ここにマイページのコンテンツを追加 -->
     <p>マイページのコンテンツ</p>

@@ -66,7 +66,6 @@ def register_form():
 @app.route('/register_exe', methods=['POST'])
 def register_exe():
     user_name = request.form.get('username')
-    mail = request.form.get('mail')
     password = request.form.get('password')
     
     if user_name == '':
@@ -75,11 +74,8 @@ def register_exe():
     if password == '':
         error = 'パスワードが未入力です。'
         return render_template('register.html', error = error)
-    if mail == '':
-        error = 'メールが未入力です。'
-        return render_template('register.html', error = error)
     
-    count = db.insert_user(user_name, mail, password)
+    count = db.insert_user(user_name, password)
     
     if count == 1:
         msg = '登録が完了しました。'

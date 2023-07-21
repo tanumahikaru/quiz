@@ -17,8 +17,8 @@ def get_hash(password, salt):
     return hashed_password
     
     
-def insert_user(user_name, mail,password):
-    sql = 'INSERT INTO quiz_user VALUES(default, %s, %s, %s, %s)'
+def insert_user(user_name, password):
+    sql = 'INSERT INTO quiz_user VALUES(default, %s, %s, %s)'
     
     salt = get_salt()
     hashed_password = get_hash(password, salt)
@@ -27,7 +27,7 @@ def insert_user(user_name, mail,password):
         connection = get_connection()
         cursor = connection.cursor()
         
-        cursor.execute(sql, (user_name, mail, hashed_password, salt))
+        cursor.execute(sql, (user_name, hashed_password, salt))
         count = cursor.rowcount #更新件数を取得
         connection.commit()
         

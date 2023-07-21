@@ -1,14 +1,23 @@
-{% extends "layout.html" %}
-
-{% block content %}
-    <h3>ユーザー登録</h3>
-    {% if error != null%}
-        <p style = "color:red;">{{error}}</p>
-    {% endif %}
-    <form action = "{{url_for('register_exe')}}" method = "post">
-        ユーザー名：<input type = "text" name = "username"><br>
-        メール:<input type = "text" name = "mail"><br>
-        パスワード：<input type = "password" name = "password"><br>
-    <button type = "submit">登録</button>
-</form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザー登録</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}">
+</head>
+<body>
+    <div class="container">
+        <h3>ユーザー登録</h3>
+        {% if error != null %}
+            <p class="error-message">{{error}}</p>
+        {% endif %}
+        <form action="{{url_for('register_exe')}}" method="post">
+            ユーザー名：<input type="text" name="username"><br>
+            パスワード：<input type="password" name="password"><br>
+            <button type="submit">登録</button>
+        </form>
+        <a href="{{url_for('login')}}">ログイン</a>
+    </div>
+</body>
+</html>

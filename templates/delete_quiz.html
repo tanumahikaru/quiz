@@ -1,5 +1,9 @@
 {% extends "layout.html" %}
 
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/delete.css')}}">
+{% endblock %}
+
     {% block content %}
 
     {% if error != null %}

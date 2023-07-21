@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ログイン</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}"
 </head>
 <body>
-    <h3>ログイン</h3>
-    {% if error != null %}
-        <p style="color:red">{{error}}</p>
-    {% endif %}
-    {% if msg != null %}
-        <p style="color:blue">{{msg}}</p>
-    {% endif %}
-    <form action="{{url_for('login')}}" method="post">
-        <p>ユーザー名：<input type = "text" name = "username" value = "{{data.user_name if data is defined else ''}}"></p>
-        <p>パスワード：<input type = "password" name = "password" value = "{{data.password if data is defined else ''}}"></p>
-        <button type = "submit">ログイン</button>
-    </form>
-    <a href = "{{url_for('register_form')}}">新規登録</a>
+    <div class="container">
+        <h3>ログイン</h3>
+        {% if error != null %}
+            <p class="error-message">{{error}}</p>
+        {% endif %}
+        {% if msg != null %}
+            <p class="success-message">{{msg}}</p>
+        {% endif %}
+        <form action="{{url_for('login')}}" method="post">
+            <p>ユーザー名：<input type="text" name="username" value="{{data.user_name if data is defined else ''}}"></p>
+            <p>パスワード：<input type="password" name="password" value="{{data.password if data is defined else ''}}"></p>
+            <button type="submit">ログイン</button>
+        </form>
+        <a href="{{url_for('register_form')}}">新規登録</a>
+    </div>
 </body>
 </html>
