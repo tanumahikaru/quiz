@@ -1,3 +1,71 @@
 body {
     background-color: #f2f2f2;
     }
+/* edit.css */
+
+/* クイズ編集フォームのスタイル */
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white; /* formタグ内の中身を白色にする */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+p.error {
+    color: red;
+}
+
+p.success {
+    color: blue;
+}
+
+/* ラベルと入力欄のスタイル */
+form label,
+form input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form label {
+    font-weight: bold;
+}
+
+/* ラジオボタンのスタイル */
+form input[type="radio"] {
+    margin-top: 5px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+/* 登録ボタンのスタイル */
+form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+form button:hover {
+    background-color: #45a049;
+}

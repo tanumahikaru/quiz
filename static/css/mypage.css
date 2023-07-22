@@ -1,24 +1,38 @@
 body {
     background-color: #f2f2f2;
-    }
+}
 
 .sample1 {  
     font-size: 100px;
     font-family: "Font Awesome 6 Free Solid";
 }
+
 .flex_test-box {
     background-color: #00BCD4;
-    padding:  10px;                 /* 余白指定 */
-    display: flex;                  /* フレックスボックスにする */
-    justify-content: space-evenly;  /* 横の位置指定 */
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
 }
+
 .flex_test-item {
-    margin:  10px;                  /* 外側の余白 */
-    border-bottom: solid 1px #fff;  /* 下線指定 */
+    margin: 10px;
+    border-bottom: solid 1px #fff;
 }
 
 .flex_test-item a {
-    color:  #fff;                   /* 文字色 */
-    text-decoration:  none;         /* デフォルトCSS打ち消し */
+    color: #fff;
+    text-decoration: none;
 }
 
+h3 {
+    font-size: 20px;
+    padding: 10px;
+    display: flex; /* テキストを横に並べる */
+    justify-content: space-evenly; /* 横の位置指定 */
+    align-items: center; /* センタリング */
+}
+
+h3 span {
+    display: flex; /* テキストを横に並べる */
+    margin-left: 50px;
+}
