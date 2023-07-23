@@ -2,6 +2,11 @@ body {
     background-color: #f2f2f2;
     }
 /* edit.css */
+/* edit.css */
+
+body {
+    background-color: #f2f2f2;
+}
 
 /* クイズ編集フォームのスタイル */
 form {
@@ -68,4 +73,19 @@ form button {
 
 form button:hover {
     background-color: #45a049;
+}
+
+/* 問題文入力欄のスタイル */
+form textarea[name="title"] {
+    height: 200px; /* 適宜調整してください */
+}
+
+/* edit.css */
+
+/* 問題文入力欄のスタイル */
+form textarea[name="title"] {
+    width: 100%; /* テキストボックスの幅を100%に指定 */
+    height: 150px; /* 高さを調整（5行程度） */
+    font-size: 16px;
+    resize: vertical; /* 垂直方向にのみリサイズ可能にする */
 }

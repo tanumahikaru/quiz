@@ -1,26 +1,30 @@
 {% extends "user_layout.html" %}
 
-    {% block content %}
-    <h1>クイズ登録</h1>
-    
-    {% if error != null %}
-        <p style="color:red">{{error}}</p>
-    {% endif %}
-    {% if msg != null %}
-        <p style="color:blue">{{msg}}</p>
-    {% endif %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='/css/edit.css')}}">
+{% endblock %}
 
-    <form action="{{url_for('user_register_quiz')}}" method="post">
-        問題文：<input type="text" name="title"><br>
-        回答１：<input type="text" name="answer1"><br>
-        回答２：<input type="text" name="answer2"><br>
-        回答３：<input type="text" name="answer3"><br>
-        回答４：<input type="text" name="answer4"><br>
-        正解:<br>
-            1<input type="radio"name="correctanswer"value=1><br>
-            2<input type="radio"name="correctanswer"value=2><br>
-            3<input type="radio"name="correctanswer"value=3><br>
-            4<input type="radio"name="correctanswer"value=4><br>
-        <button type="submit">登録</button>
-  </form>
-  {% endblock %}
+{% block content %}
+<h1>クイズ登録</h1>
+
+{% if error != null %}
+    <p style="color:red">{{error}}</p>
+{% endif %}
+{% if msg != null %}
+    <p style="color:blue">{{msg}}</p>
+{% endif %}
+
+<form action="{{url_for('register_quiz')}}" method="post">
+    問題文：<textarea name="title"></textarea><br>
+    回答１：<input type="text" name="answer1"><br>
+    回答２：<input type="text" name="answer2"><br>
+    回答３：<input type="text" name="answer3"><br>
+    回答４：<input type="text" name="answer4"><br>
+    正解:<br>
+        1<input type="radio"name="correctanswer"value=1><br>
+        2<input type="radio"name="correctanswer"value=2><br>
+        3<input type="radio"name="correctanswer"value=3><br>
+        4<input type="radio"name="correctanswer"value=4><br>
+    <button type="submit">登録</button>
+</form>
+{% endblock %}
