@@ -233,10 +233,10 @@ def edit_quiz():
     
     if count == 1:
         msg = '編集が完了しました。'
-        return render_template('register_quiz.html', msg=msg)
+        return render_template('edit_quiz.html', msg=msg)
     else:
         error = '編集に失敗しました。'
-    return render_template('register_quiz.html', error=error)
+    return render_template('edit_quiz.html', error=error)
 
 @app.route('/quiz/<int:quizid>', methods=['GET'])
 def quiz(quizid):
